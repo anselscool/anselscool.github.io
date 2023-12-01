@@ -1,6 +1,8 @@
 body {
 font-family: monospace;
 text-align: center;
+background-color: #131516;
+text-color: #e8e6e3;
 }
 h1 {
 font-size: 40px;
