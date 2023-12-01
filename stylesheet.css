@@ -2,16 +2,22 @@ body {
 font-family: monospace;
 text-align: center;
 background-color: #131516;
-text-color: #e8e6e3;
 }
 h1 {
 font-size: 40px;
 text-align: center;
+text-color: #e8e6e3;
 }
 img {
 width: 100px;
 height: 100px;
 }
 p {
-    font-size: 20px;
+font-size: 20px;
+text-color: #e8e6e3;
+}
+a:link {
+color: #004daa;
+background-color: transparent;
+text-decoration: none;
 }
