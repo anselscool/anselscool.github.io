@@ -1,9 +1,6 @@
 body {
 @font-face {
-font-family: "font";
-src: url("Px437_IBM_VGA_8x16.ttf");
-}
-font-family: "font";
+font-family: monospace;
 text-align: center;
 background-color: #131516;
 color: white;
