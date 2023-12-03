@@ -1,13 +1,12 @@
 body {
-font-family: monospace;
+font-family: IBM VGA 8x16;
 text-align: center;
 background-color: #131516;
+font-color: white;
 }
 h1 {
 font-size: 40px;
 text-align: center;
-text-color: white;
-font-family: ibm vga;
 }
 img {
 width: 100px;
@@ -15,7 +14,6 @@ height: 100px;
 }
 p {
 font-size: 20px;
-text-color: white;
 }
 a:link {
 color: #004daa;
