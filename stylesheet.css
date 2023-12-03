@@ -1,9 +1,9 @@
 body {
 @font-face {
-font-family: font;
+font-family: "font";
 src:local("Px437_IBM_VGA_8x16.ttf");
 }
-font-family: font;
+font-family: "font";
 text-align: center;
 background-color: #131516;
 font-color: white;
