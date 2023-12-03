@@ -6,7 +6,7 @@ src: url("Px437_IBM_VGA_8x16.ttf");
 font-family: "font";
 text-align: center;
 background-color: #131516;
-font-color: white;
+color: white;
 }
 h1 {
 font-size: 40px;
