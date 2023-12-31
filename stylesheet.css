@@ -1,8 +1,9 @@
-body {
+:body {
 font-family: monospace;
 text-align: center;
 background-color: #131516;
 color: white;
+padding: 20%;
 }
 h1 {
 font-size: 40px;
@@ -12,11 +13,8 @@ img {
 width: 100px;
 height: 100px;
 }
-p {
-font-size: 20px;
-}
 a:link {
-color: #004daa;
+color: #008ECC;
 background-color: transparent;
 text-decoration: none;
 }
