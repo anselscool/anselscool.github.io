@@ -1,23 +1,365 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="stylesheet.css">
-<title>~/ansel/coolstuff</title>
+<title>~/ansel/about</title>
 <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/anselscool/anselscool.github.io/main/cat.png">
 </head>
 <body>
+<script type="text/javascript">
+// <![CDATA[
+var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+var sparkles=50;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+*(c)2005-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+  if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+  if (--tinyv[i]==25) {
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
 <h5>
 <a href="index.html">
 <span style="color: #008ECC">←</span>
 home
 </a>
+</h5>
 <h1>
 <span style="color: #008ECC">~ ansel's</span>
 collection of cool stuff
 </h1>
+<h2>collection of things i have found on the internet that i think are cool</h2>
+<ul>
+<li>Academic Resources</li>
+<li>Wikis</li>
+<li>Blog posts and Articles</li>
+<li>Personal Websites</li>
+<li>Misc. Tech stuff</li>
+<li>Misc</li>
+</ul>
 <br>
-<h2>Coming Soon...</h2>
+<h3>Academic Resources</h3>
+<p>
+<span style="color: #008ECC">~</span>
+<a href="https://systemcrafters.net/guides/" target="_blank">System Crafters</a> - Great guides on Emacs
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://libgen.is/" target="_blank">Library Genesis</a> - Free books!
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://harmful.cat-v.org/" target="_blank">cat -v</a> - Encyclopedia of things considered harmful
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://plato.stanford.edu/index.html" target="_blank">Stanford Encyclopedia of Philosophy</a>
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://snap.stanford.edu/data/" target="_blank">Stanford Large Network Dataset Collection</a> - Large amount of free data
+<br>
+</p>
+<br>
+<h3>Wikis</h3>
+<p>
+<span style="color: #008ECC">~</span>
+<a href="https://wiki.archlinux.org/" target="_blank">Arch Wiki</a>
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://www.thinkwiki.org/wiki/ThinkWiki" target="_blank">ThinkWiki</a> - Wiki for all things Thinkpad
+<br>
+<h3>Blog posts and Articles</h3>
+<p>
+<span style="color: #008ECC">~</span>
+<a href="https://ssd.eff.org/module/why-metadata-matters" target="_blank">Why Metadata Matters</a>
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://rmkit.dev/eink-is-so-retropunk/" target="_blank">E-ink is so Retropunk</a>
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://pydanny.blogspot.com/2011/08/github-is-my-resume.html" target="_blank">GitHub is my resume</a>
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://restoreprivacy.com/firefox-privacy/" target="_blank">Firefox privacy guide</a>
+<br>
+</p>
+<h3>Personal Websites</h3>
+<p>
+<span style="color: #008ECC">~</span>
+<a href="https://knny.io/" target="_blank">knny.io</a> - Makes great art
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://www.cameronsworld.net/" target="_blank">Cameron's World</a>
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://mm4rk3t.neocities.org/home" target="_blank">mm4rk3t</a>
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://nosleepforme.neocities.org/" target="_blank">NO SLEEP</a>
+<br>
+</p>
+<h3>Misc. Tech stuff</h3>
+<p>
+<span style="color: #008ECC">~</span>
+<a href="https://xkcd.com/" target="_blank">xkcd</a> - Cool comics
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://terminal.sexy/" target="_blank">Terminal Sexy</a> - Great tool for creating terminal colour schemes
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://int10h.org/" target="_blank">int10h</a> - Huge collection of classic system fonts
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://www.protondb.com/" target="_blank">ProtonDB</a> - Great tool for checking game compatibility on Linux
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://patorjk.com/software/taag/" target="_blank">Text to ASCII Art Generator</a>
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://www.shellcheck.net/" target="_blank">Shell Checker</a> - finds bugs in your shell scripts
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://writefreely.org/" target="_blank">WriteFreely</a> - Federated blog platform
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://geekhack.org/index.php" target="_blank">GeekHack</a> - Mechanical Keyboard Community
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://prism-break.org/en/" target="_blank">Prism-Break</a> - Alternatives to apps that are focused on privacy
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://syncthing.net/" target="_blank">Syncthing</a> - Great tool for syncing files between devices
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://12ft.io/" target="_blank">12ft</a> - hop paywalls
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://temp-mail.org/en/" target="_blank">Temp-Mail</a> - Tempory Email addresses
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://www.autohotkey.com/" target="_blank">autohotkey</a> - Tool for creating hotkeys on Windows
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://carbon.now.sh/" target="_blank">Carbon</a> - Create images of your source code
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://backgroundchecks.org/justdeleteme/" target="_blank">JustDeleteMe</a> - How to delete your account from web services
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://lainchan.org/" target="_blank">LAINCHAN</a> - Cool board
+<br>
+</p>
+<h3>Misc.</h3>
+<p>
+<span style="color: #008ECC">~</span>
+<a href="https://www.music-map.com/" target="_blank">Music-Map</a> - Great tool to find similar music
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://poolsuite.net/" target="_blank">Pool Suite</a> - Retro styled internet radio
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://wiby.me/" target="_blank">Wiby</a> - Search engine for the classic web
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://theoldnet.com/" target="_blank">The Old Net</a> - Another search engine for the classic web
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://neocities.org/" target="_blank">neocities</a> - create your own free website
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://time.is/" target="_blank">time.is</a> - Quick and easy way to check timezones
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://unsplash.com/images" target="_blank">Unsplash</a> - Free stock images
+<br>
+<span style="color: #008ECC">~</span>
+<a href="https://www.spacejam.com/1996/" target="_blank">Space Jam</a>
+<br>
+</p>
 </body>
 </html>

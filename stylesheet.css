@@ -8,9 +8,27 @@ h1 {
 font-size: 40px;
 text-align: center;
 }
-img {
-width: 100px;
-height: 100px;
+h1, h2, h3 {
+text-align: centre;
+}
+.links {
+padding-left: 300px;
+}
+p, ul, li {
+text-align: left;
+max-width: 800px;
+margin: auto;
+padding-left: 200px;
+padding-right: 200px;
+}
+li::before {
+content: "~";
+margin-right: 0.5em;
+color: #008ECC;
+}
+ul {
+list-style: none;
+padding: 0;
 }
 a:link {
 color: #008ECC;
