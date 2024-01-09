@@ -1,34 +1,16 @@
 body {
-font-family: monospace;
-text-align: center;
+max-width: 48em;
+margin-left: auto;
+margin-right: auto;
 background-color: #131516;
 color: white;
 }
-h1 {
-font-size: 40px;
-text-align: center;
-}
-h1, h2, h3 {
-text-align: centre;
-}
-.links {
-padding-left: 300px;
-}
-p, ul, li {
-text-align: left;
-max-width: 800px;
-margin: auto;
-padding-left: 200px;
-padding-right: 200px;
-}
-li::before {
-content: "~";
-margin-right: 0.5em;
-color: #008ECC;
-}
-ul {
-list-style: none;
-padding: 0;
+p {
+display: block;
+margin-block-start: 1em;
+margin-block-end: 1em;
+margin-inline-start: 0px;
+margin-inline-end: 0px;
 }
 a:link {
 color: #008ECC;
